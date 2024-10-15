@@ -1,18 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Route untuk halaman beranda
+Route::get('/', [MenuController::class, 'home'])->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route untuk halaman About
+Route::get('/about', [MenuController::class, 'about'])->name('about');
+
+// Route untuk halaman Contact
+Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
+
+// Route untuk halaman Profil
+Route::get('/profil', [MenuController::class, 'profil'])->name('profil');
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
