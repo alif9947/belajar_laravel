@@ -1,18 +1,16 @@
-<!-- resources/views/contact.blade.php -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
+@extends('layouts.app')
 
-    @include('components.menu')
+@section('title')
+    Contact
+@endsection
 
-    <div class="container">
-        <h1>Contact Us</h1>
-        <p>Ini adalah konten halaman contact.</p>
+@section('content')
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            Ini adalah halaman Contact
+        </div>
     </div>
-</body>
-</html>
+</div>
+@endsection

@@ -1,18 +1,16 @@
-<!-- resources/views/home.blade.php -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
+@extends('layouts.app')
 
-    @include('components.menu')
+@section('title')
+    Home
+@endsection
 
-    <div class="container">
-        <h1>Selamat Datang di Halaman Beranda</h1>
-        <p>Ini adalah konten halaman beranda.</p>
+@section('content')
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            Ini adalah halaman Home
+        </div>
     </div>
-</body>
-</html>
+</div>
+@endsection
