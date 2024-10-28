@@ -16,10 +16,18 @@ Route::get('/contact', [MenuController::class, 'contact'])->name('contact');
 // Route untuk halaman Profil
 Route::get('/profil', [MenuController::class, 'profil'])->name('profil');
 
-// Route untuk halaman login
+// Route untuk halaman signup
 Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::post('/strore-signup', [AuthController::class, 'storeSignup'])->name('storeSignup');
 
+// Route untuk halaman signin
+Route::get('/signin', [AuthController::class, 'signin'])->name('signin');
+Route::post('/strore-signin', [AuthController::class, 'storeSignin'])->name('storeSignin');
+
+route::get('logout', function () {
+    Auth::logout();
+    return redirect()->to('/')->with('success', 'Berhasil logout');
+})->name('logout')->mddleeare('auth');
 
 // Route::get('/', function () {
 //     return view('welcome');

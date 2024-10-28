@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>singup</title>
+    <title>signin</title>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
 </head>
 <body>
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4" style="padding-top:100px ">
-                <h3>singup</h3>
+                <h3>Signin</h3>
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -25,15 +25,10 @@
                             @endforeach
                     </div>
                 @endif
-                <form method="POST" action="{{ route('storeSignup') }}">
-                    @csrf
+                <form method="POST" action="{{ route('storeSignin') }}">
+                @csrf
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">name</label>
-                        <input type="text" class="form-control" name="name" >
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                      </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <label for="exampleInputEmail1" class="form-label">Email/User</label>
                       <input type="email" class="form-control" name="email" >
                       <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
