@@ -28,4 +28,11 @@ class MenuController extends Controller
     {
         return view('profil');
     }
+
+    public function signup()
+    {
+        return view('auth.signup');
+    }
+
+
 }
