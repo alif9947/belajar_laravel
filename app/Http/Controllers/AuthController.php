@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash as Hsha;
 
 class AuthController extends Controller
 {
@@ -18,7 +20,15 @@ class AuthController extends Controller
         'password' => 'required'
     ]);
 
-    dd($request);
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hsha::make($request->password)
+    ]);
+
+    return redirect()->back()->with('success', 'Berhasil');
+
+    // dd($request);
 }
 
 
