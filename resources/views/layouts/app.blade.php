@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <link rel="icon" href="{{ asset('asset/logo.png') }}" type="image/png">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
 </head>
