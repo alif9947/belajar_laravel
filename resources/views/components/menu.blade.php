@@ -19,15 +19,16 @@
                 @else
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">user</a>
-
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('users') }}">user</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('categories') }}">category</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('posts') }}">Post</a>
                     </div>
-
-                    </div>
-                    <a href="{{ route('logout') }}" class="btn btn-danger m-2">logout</a>
-
+                </div>
+                <a href="{{ route('logout') }}" class="btn btn-danger m-2">logout</a>
             </div>
-        </div>@endif
+        </div>
+        @endif
         </div>
     </div>
 </nav>

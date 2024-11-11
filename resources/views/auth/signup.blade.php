@@ -8,6 +8,8 @@
 </head>
 <body>
     <div class="container">
+
+        <a href="javascript:void(0)" onclick="window.history.back()" class="btn btn-primary">Kembali</a>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4" style="padding-top:100px ">

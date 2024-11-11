@@ -53,5 +53,86 @@ public function storeSignin(Request $request){
     ])->withInput() ;
 }
 
+public function showUsers()
+    {
+        $users = User::all();
+        return view('users.users', compact('users'));
+    }
+
+    // Menampilkan detail pengguna berdasarkan ID
+    public function showUser($id)
+    {
+        $user = User::findOrFail($id);
+        return response()->json($user);
+    }
+
+    // Menampilkan halaman edit user
+public function editUser($id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->route('users')->with('error', 'User tidak ditemukan');
+    }
+
+    return view('users.edit', compact('user'));
+}
+
+// Mengupdate data user
+public function updateUser(Request $request, $id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->route('users')->with('error', 'User tidak ditemukan');
+    }
+
+    // Validasi input
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|unique:users,email,' . $user->id,
+        'password' => 'nullable|min:6'
+    ]);
+
+    // Update data user
+    $user->name = $request->name;
+    $user->email = $request->email;
+    if ($request->password) {
+        $user->password = Hash::make($request->password);
+    }
+    $user->save();
+
+    return redirect()->route('users')->with('success', 'Data pengguna berhasil diperbarui');
+}
+
+// Menghapus data user
+public function deleteUser($id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->route('users')->with('error', 'User tidak ditemukan');
+    }
+
+    $user->delete();
+
+    return redirect()->route('users')->with('success', 'User berhasil dihapus');
+}
+
+// Menangani pencarian pengguna
+public function searchUsers(Request $request)
+{
+    $query = $request->input('search');
+
+    // Mengambil data pengguna yang sesuai dengan query pencarian
+    $users = User::when($query, function ($queryBuilder) use ($query) {
+        return $queryBuilder->where('name', 'like', "%{$query}%")
+                            ->orWhere('email', 'like', "%{$query}%");
+    })->get();
+
+    // Kirim data pengguna ke view
+    return view('users.users', compact('users'));
+}
+
 
 }
