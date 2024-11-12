@@ -26,16 +26,17 @@ class PostController extends Controller
     }
 
 
-
     public function store(Request $request)
     {
         $request->validate([
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|unique:posts,title',
             'body' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
         ]);
 
+
+        // Handle upload gambar
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/posts'), $imageName);
@@ -43,17 +44,18 @@ class PostController extends Controller
             $imageName = null;
         }
 
+
         Post::create([
             'category_id' => $request->category_id,
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'body' => $request->body,
-            'image' => $imageName,
+            'image' => $imageName, // Simpan nama file gambar
         ]);
 
-        return redirect()->route('posts.index')->with('success', 'Postingan berhasil ditambahkan.');
-    }
 
+        return redirect()->route('posts')->with('success', 'Postingan berhasil ditambahkan.');
+    }
 
 
     public function show(Post $post)
@@ -75,33 +77,39 @@ class PostController extends Controller
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|unique:posts,title,' . $post->id,
             'body' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
         ]);
 
+
+        // Handle upload gambar (jika ada gambar baru)
         if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
             if ($post->image) {
                 $oldImagePath = public_path('images/posts/' . $post->image);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
+
+
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images/posts'), $imageName);
         } else {
-            $imageName = $post->image;
+            $imageName = $post->image; // Gunakan nama file gambar lama
         }
+
 
         $post->update([
             'category_id' => $request->category_id,
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'body' => $request->body,
-            'image' => $imageName,
+            'image' => $imageName, // Simpan nama file gambar
         ]);
 
-        return redirect()->route('posts.index')->with('success', 'Postingan berhasil diupdate.');
-    }
 
+        return redirect()->route('posts')->with('success', 'Postingan berhasil diupdate.');
+    }
 
 
     public function destroy(Post $post)
