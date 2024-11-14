@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     public function home()
     {
-        return view('home');
+        $posts = Post::latest()->take(5)->get(); // Get the latest 5 posts
+        return view('home', compact('posts'));
+
     }
 
     // Metode untuk halaman About
