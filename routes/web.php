@@ -49,6 +49,7 @@ Route::get('/users/search', [AuthController::class, 'searchUsers'])->name('searc
 Route::resource('categories', CategoryController::class);
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 
+
 // Route untuk menampilkan daftar semua post
 Route::resource('posts', PostController::class);
 Route::get('/posts', [PostController::class, 'index'])->name('posts');

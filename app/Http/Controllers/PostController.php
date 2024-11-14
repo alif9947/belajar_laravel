@@ -12,9 +12,21 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('category')->latest()->paginate(10);
+        $search = $request->input('search');
+
+        // Query untuk mencari postingan berdasarkan judul atau nama kategori
+        $posts = Post::with('category')
+            ->when($search, function ($query, $search) {
+                return $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhereHas('category', function ($q) use ($search) {
+                        $q->where('name', 'like', '%' . $search . '%');
+                    });
+            })
+            ->latest()
+            ->paginate(10);
+
         return view('posts.index', compact('posts'));
     }
 
