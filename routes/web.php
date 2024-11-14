@@ -24,10 +24,11 @@ Route::post('/strore-signup', [AuthController::class, 'storeSignup'])->name('sto
 Route::get('/signin', [AuthController::class, 'signin'])->name('signin');
 Route::post('/strore-signin', [AuthController::class, 'storeSignin'])->name('storeSignin');
 
-route::get('logout', function () {
+Route::get('logout', function () {
     Auth::logout();
     return redirect()->to('/')->with('success', 'Berhasil logout');
-})->name('logout')->mddleeare('auth');
+})->name('logout')->middleware('auth');
+
 
 // Route::get('/', function () {
 //     return view('welcome');
