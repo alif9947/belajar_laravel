@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-light"  style="background-color: #BE4346;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#757775 ; pedding: 10px;" >
     <div class="container-fluid">
         <img src="{{ asset('asset/logo.png') }}" alt="">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,8 +14,8 @@
             </div>
             <div class="d-flex ms-auto">
 
-                    <a href="{{ route('signup') }}" class="btn btn-danger m-2">signup</a>
-                    <a href="{{ route('signin') }}" class="btn btn-primary m-2">signin</a>
+                    <a href="{{ route('signup') }}" class="btn btn-danger m-2">sign up</a>
+                    <a href="{{ route('signin') }}" class="btn btn-primary m-2">sign in</a>
                 @else
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
